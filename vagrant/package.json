@@ -1,0 +1,20 @@
+{
+  "name": "item-catalog",
+  "version": "1.0.0",
+  "description": "Udacity FullStack Nanodegree Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Python",
+    "Flask",
+    "SQLAlchemy",
+    "HTML",
+    "Jinja2",
+    "CSS",
+    "Javascript"
+  ],
+  "author": "Sinasi Eren Senel",
+  "license": "ISC"
+}

@@ -1,0 +1,30 @@
+/*
+colors
+#1B4079
+#CFDBD5
+#F6AE2D
+#8499B1
+#21295C
+*/
+
+.navbar{
+  border-radius: 0 !important;
+}
+
+.navbar-inverse{
+  background-color: #21295C !important;
+}
+
+
+.item-catalog-nav-link{
+  color:#CFDBD5 !important;
+}
+
+.item-catalog-nav-link:hover{
+  color:#F6AE2D !important;
+  background-color: #1B4079 !important;
+}
+
+.font-awesome-nav-bar{
+  margin-right:10px;
+}

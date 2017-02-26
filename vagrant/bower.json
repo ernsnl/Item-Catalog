@@ -1,0 +1,31 @@
+{
+  "name": "item-catalog",
+  "description": "Udacity FullStack Nanodegree Project",
+  "main": "app.js",
+  "authors": [
+    "Sinasi Eren Senel"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "Python",
+    "Flask",
+    "SQLAlchemy",
+    "HTML",
+    "Jinja2",
+    "CSS",
+    "Javascript"
+  ],
+  "homepage": "https://github.com/ernsnl/Item-Catalog",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0"
+  }
+}
