@@ -1,4 +1,4 @@
-from flask import Blueprint, session, redirect, url_for, escape, request, flash
+from flask import Blueprint, session, redirect, url_for, escape, request, flash, render_template
 from utility.string_func import generate_random_string
 from classes.orm import User
 from application import engine
@@ -9,13 +9,66 @@ user_app = Blueprint('user', __name__)
 
 @user_app.route('/user/<int:user_id>')
 def user(user_id):
+    if user_id is None:
+        return redirect(url_for('main.index'))
+    try:
+        database_session = sessionmaker(bind=engine)
+        current_session = database_session()
+        requested_user = current_session.query(
+            User).filter(User.id == user_id).first()
+        current_user = None
+        if 'email' in session:
+            current_user = current_session.query(User).filter(
+                User.email == session['email']).first()
+        if requested_user is not None:
+            return render_template('user/about.html',
+                                   requested_user=requested_user,
+                                   user=current_user)
+        else:
+            flash('Requested User does not exist', 'error')
+            return redirect(url_for('main.index'))
+    except Exception as e:
+        raise
+    finally:
+        pass
+
     return 'It will display individual user'
 
 
-@user_app.route('/user/edit')
-@user_app.route('/user/edit/<int:user_id>')
-def user_edit(user_id=None):
-    return 'It will edit user'
+@user_app.route('/user/edit/<int:user_id>', methods=['GET', 'POST'])
+def user_edit(user_id):
+    try:
+        database_session = sessionmaker(bind=engine)
+        current_session = database_session()
+        if request.method == 'GET':
+            if 'email' in session:
+                current_user = current_session.query(User).filter(
+                    User.email == session['email']).first()
+                if current_user.id == user_id:
+                    return render_template('user/edit.html', user = current_user)
+                else:
+                    flash('You are not authorized to edit this user.', 'error')
+                    return redirect(url_for('main.index'))
+            else:
+                flash('You are not logged in.', 'error')
+                return redirect(url_for('main.index'))
+        else:
+            if 'email' in session:
+                current_user = current_session.query(User).filter(
+                    User.email == session['email']).first()
+                current_user.name = request.form.get('Name')
+                current_user.img_url =  request.form.get('ImageUrl')
+                current_session.commit()
+                flash('Updated successfully.', 'success')
+                return redirect(url_for('user.user', user_id=current_user.id))
+            else:
+                flash('You are not logged in.', 'error')
+                return redirect(url_for('main.index'))
+    except Exception as e:
+        print e
+    finally:
+        current_session.close()
+
 
 
 @user_app.route('/connect', methods=['GET'])

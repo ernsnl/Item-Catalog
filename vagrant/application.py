@@ -14,7 +14,11 @@ engine = create_engine(
 def utility_function():
     def current_provider():
         return session['provider']
-    return dict(current_provider=current_provider)
+    def CSRFToken():
+        if not 'CSRFToken' in session:
+            session['CSRFToken'] = generate_random_string(100)
+        return session['CSRFToken']
+    return dict(current_provider=current_provider, CSRFToken= CSRFToken)
 
 def initiate_session_token():
     if not 'CSRFToken' in session:

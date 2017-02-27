@@ -12,7 +12,7 @@ def index():
         current_session = database_session()
         if 'email' in session and current_session.query(User).filter(User.email == session['email']).first() is not None:
             current_user = current_session.query(User).filter(User.email==session['email']).first()
-        return render_template('main/index.html', CSRFToken = session['CSRFToken'], user=current_user)
+        return render_template('main/index.html', user=current_user)
     except Exception as e:
         print e
     finally:

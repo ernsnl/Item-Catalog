@@ -11,7 +11,7 @@ function handleFacebook() {
             FB.login(function(response) {
                 console.log(response)
                 if (response.status === 'connected') {
-                    FB.api('/' + response.authResponse.userID + '?fields=id,name,email,picture',
+                    FB.api('/' + response.authResponse.userID + '?fields=id,name,email,picture.width(200).height(200)',
                         function(infoResponse) {
                             console.log(infoResponse);
                             if (infoResponse && !infoResponse.error) {

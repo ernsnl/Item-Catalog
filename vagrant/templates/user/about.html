@@ -1,0 +1,15 @@
+{% extends "layout.html" %} {% block content %}
+<div class="row">
+  <div class="col-xs-12">
+      <img class="about-user-image" src="{{requested_user.img_url}}" alt="{{requested_user.name}}">
+      <p class="about-user-info"><span class='about-title'>Name: </span>{{requested_user.name}}</p>
+      <p class="about-user-info"><span class='about-title'>Email: </span>{{requested_user.email}}</p>
+      {% if user and user.id == requested_user.id %}
+      <a type="button" href="{{url_for('user.user_edit', user_id = user.id)}}" class="user-edit-button btn btn-primary">Edit</a>
+      {% endif %}
+  </div>
+</div>
+
+
+
+{% endblock %}

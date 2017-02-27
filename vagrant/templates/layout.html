@@ -87,9 +87,7 @@
     <footer class="container-fluid text-center">
         <p>Footer Text</p>
     </footer>
-
-    {% if CSRFToken %}
-    <input id='CSRFToken' type="hidden" name="CSRFToken" value="{{CSRFToken}}"> {% endif %}
+    <input id='CSRFToken' type="hidden" name="CSRFToken" value="{{CSRFToken()}}">
 </body>
 <script>
     window.fbAsyncInit = function() {
