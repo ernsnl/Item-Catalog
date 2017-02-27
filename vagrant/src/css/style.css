@@ -102,3 +102,16 @@ colors
     margin: 15px;
     border-radius: 3px;
 }
+
+.view-title {
+    float: left;
+    margin-bottom: 15px;
+    padding: 10px;
+    text-transform: center;
+    width: 100%;
+}
+
+.view-list {
+    float: left;
+    width: 100%;
+}

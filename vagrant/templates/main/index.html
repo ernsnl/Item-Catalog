@@ -37,7 +37,7 @@
                 <h4>User Created Categories</h4> {% if user.categories|length > 0%}
                 <ul>
                     {% for category in user.categories %}
-                    <li> <a href=""> category.name</a></li>
+                    <li> <a href="{{url_for('category.category_individual', category_id = category.id)}}"> {{category.name}}</a></li>
                     {% endfor %}
                 </ul>
                 {% else %}

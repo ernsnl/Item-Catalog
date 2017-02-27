@@ -10,6 +10,7 @@
                 <label for="ImageUrl">ImageUrl</label>
                 <input type="text" class="form-control" id="ImageUrl" name='ImageUrl' placeholder="Image Url" value='{{user.img_url}}'>
             </div>
+            <input type="hidden" name="CSRFToken" value="{{CSRFToken()}}">
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
     </div>

@@ -1,0 +1,24 @@
+{% extends "layout.html" %} {% block content %}
+<div class="row">
+    <div class="col-xs-12">
+        <h3 class='view-title'>Category</h3>
+        <p class="about-user-info"><span class='about-title'>Name: </span>{{category.name}}</p>
+        <p class="about-user-info"><span class='about-title'>Descriptive Text: </span>{{category.descriptive_text}}</p>
+        <div class="view-list">
+            <h4 class="view_title">Items</h4>
+            <ul>
+                {% if category.items|length > 0 %} {% for item in category.items %}
+                <li><a href="{{(url_for('item.item_individual', item_id = item.id))}}">{{item.name}}</a></li>
+                {% endfor %} {% else %}
+                <li>There is no item in this category.</li>
+                {% endif %}
+            </ul>
+        </div>
+        {% if user and user.id == category.user_id %}
+        <a type="button" href="{{url_for('category.category_edit', category_id = category.id)}}" class="user-edit-button btn btn-primary">Edit</a> {% endif %}
+    </div>
+</div>
+
+
+
+{% endblock %}

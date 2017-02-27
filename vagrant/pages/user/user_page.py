@@ -53,6 +53,9 @@ def user_edit(user_id):
                 flash('You are not logged in.', 'error')
                 return redirect(url_for('main.index'))
         else:
+            if session['CSRFToken'] != request.form.get('CSRFToken'):
+                flask('There is problem with your session!', 'error')
+                return redirect(url_for(main.index))
             if 'email' in session:
                 current_user = current_session.query(User).filter(
                     User.email == session['email']).first()
