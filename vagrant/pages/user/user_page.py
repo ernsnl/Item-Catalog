@@ -1,4 +1,4 @@
-from flask import Blueprint, session, redirect, url_for, escape, request
+from flask import Blueprint, session, redirect, url_for, escape, request, flash
 from utility.string_func import generate_random_string
 from classes.orm import User
 from application import engine
@@ -39,6 +39,7 @@ def connect():
             session['provider'] = provider
             session['email'] = email
             session['name'] = name
+            flash('You were successfully logged in', 'success')
             return 'OK'
         else:
             return 'Error'
@@ -56,6 +57,7 @@ def disconnect():
             session.pop('provider', None)
             session.pop('email', None)
             session.pop('name', None)
+            flash('You were successfully logged out', 'success')
             return 'OK'
         else:
             return 'Error'

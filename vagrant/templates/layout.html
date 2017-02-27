@@ -22,7 +22,7 @@
 
 <body>
     <div class="transition-filter hidden">
-      <i style="left:50%;top:50%; position:absolute; color:white;" class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+        <i style="left:50%;top:50%; position:absolute; color:white;" class="fa fa-cog fa-spin fa-3x fa-fw"></i>
     </div>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
@@ -64,6 +64,17 @@
             </div>
         </div>
     </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
+    <div class="flashes">
+        {% for category, message in messages %}
+        <div class="alert alert-dismissible flash-message {{category}}" role="alert">
+            <button type="button" class="close" style="top:0;right:0;" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
 
     <div class="container">
         <div class="row">

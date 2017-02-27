@@ -15,6 +15,7 @@ class Category(Base):
     __tablename__ = 'Category'
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
+    descriptive_text = Column(String(500), nullable=False)
     user_id = Column(Integer, ForeignKey('User.id'))
     user = relationship('User', back_populates='categories')
     items = relationship('Item', back_populates='category')
@@ -23,6 +24,7 @@ class Item(Base):
     __tablename__ = 'Item'
     id = Column(Integer, primary_key=True)
     name = Column(String(150), nullable=False)
+    descriptive_text = Column(String(500), nullable=False)
     user_id = Column(Integer, ForeignKey('User.id'))
     category_id = Column(Integer, ForeignKey('Category.id'))
 
