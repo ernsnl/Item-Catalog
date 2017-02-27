@@ -1,10 +1,14 @@
-from flask import Flask
+from flask import Flask, session
 from flask_sqlalchemy import SQLAlchemy
+from utility.string_func import generate_random_string
 
 db = SQLAlchemy()
 
 # application factory, see: http://flask.pocoo.org/docs/patterns/appfactories/
 
+def initiate_session_token():
+    if not 'CSRFToken' in session:
+        session['CSRFToken'] = generate_random_string(100)
 
 def create_app():
     app = Flask(__name__, static_folder='build')
@@ -24,6 +28,10 @@ def create_app():
     app.register_blueprint(api)
     app.register_blueprint(item_app)
     app.register_blueprint(user_app)
+    # secret key
+    app.secret_key = 'Iy9nqBE25fJ8XkQHFz1Z'
+    # init CSRFToken
+    app.before_request(initiate_session_token)
 
     with app.app_context():
         db.create_all()

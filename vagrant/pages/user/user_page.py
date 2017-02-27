@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, session, redirect, url_for, escape, request
 from application import db
+from utility.string_func import generate_random_string
 
 user_app = Blueprint('user', __name__)
 
@@ -15,9 +16,13 @@ def user_edit(user_id=None):
     return 'It will edit user'
 
 
-@user_app.route('/connect')
+@user_app.route('/connect', methods=['GET'])
 def connect():
-    return 'User will Connect'
+    CSRFToken = request.args.get('CSRFToken')
+    if CSRFToken is not None and session['CSRFToken'] == CSRFToken:
+        return 'Will Authenticate'
+    else:
+        return 'Error'
 
 
 @user_app.route('/disconnect')

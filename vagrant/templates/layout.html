@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id" content="781690799289-2q0asjktodv4j1nlf5vu6mu34cr1h7i2.apps.googleusercontent.com">
     <title>{% block title %}{% endblock %} - Udacity FullStack NanoDegree Developer Project</title>
     <link rel="stylesheet" href="/build/css/bootstrap.min.css">
     <link rel="stylesheet" href="/build/css/font-awesome.min.css">
@@ -52,10 +53,9 @@
                     <li><a class='item-catalog-nav-link' href="{{url_for('user.user', user_id == user.id)}}"><i class="fa fa-user" aria-hidden="true"></i>My Account</a></li>
                     <li><a class='item-catalog-nav-link' href="javascript:void(0)" onclick='disconnect()'><i class="fa fa-sign-out" aria-hidden="true"></i>Disconnect</a></li>
                     {% else %}
-                    <li><a style="cursor:normal;" href="javascript:void(0)">Connect with:</a></li>
+                    <li><a style="cursor:normal !important;" href="javascript:void(0)">Connect with:</a></li>
                     <li><a class='item-catalog-nav-link' href="javascript:void(0)" onclick='connect("facebook")'><i class="font-awesome-nav-bar fa fa-facebook-official" aria-hidden="true"></i>Facebook</a></li>
-                    <li><a class='item-catalog-nav-link' href="javascript:void(0)" onclick='connect("google")'><i class="font-awesome-nav-bar fa fa-google" aria-hidden="true"></i>Google</a></li>
-                    <li><a class='item-catalog-nav-link' href="javascript:void(0)" onclick='connect("github")'><i class="font-awesome-nav-bar fa fa-github" aria-hidden="true"></i>Github</a></li>
+                    <li><a id="google-signin" class='item-catalog-nav-link' href="javascript:void(0)" onclick='connect("google")'><i class="font-awesome-nav-bar fa fa-google" aria-hidden="true"></i>Google</a></li>
                     {% endif %}
 
                 </ul>
@@ -75,10 +75,35 @@
         <p>Footer Text</p>
     </footer>
 
+    {% if CSRFToken %}
+    <input id='CSRFToken' type="hidden" name="CSRFToken" value="{{CSRFToken}}">
+     {% endif %}
 </body>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId: '1360350787321583',
+            xfbml: true,
+            version: 'v2.8'
+        });
+        FB.AppEvents.logPageView();
+    };
 
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
 <script src="/build/js/jquery.min.js" charset="utf-8"></script>
 <script src="/build/js/bootstrap.min.js" charset="utf-8"></script>
 <script src="/build/js/main.min.js" charset="utf-8"></script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+{% block scripts %} {% endblock %}
 
 </html>
