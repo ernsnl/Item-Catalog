@@ -21,7 +21,9 @@
 </head>
 
 <body>
-
+    <div class="transition-filter hidden">
+      <i style="left:50%;top:50%; position:absolute; color:white;" class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+    </div>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -50,8 +52,8 @@
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     {% if user %}
-                    <li><a class='item-catalog-nav-link' href="{{url_for('user.user', user_id = user.id)}}"><i class="fa fa-user" aria-hidden="true"></i>My Account</a></li>
-                    <li><a class='item-catalog-nav-link' href="javascript:void(0)" onclick='disconnect()'><i class="fa fa-sign-out" aria-hidden="true"></i>Disconnect</a></li>
+                    <li><a class='item-catalog-nav-link' href="{{url_for('user.user', user_id = user.id)}}"><i class="font-awesome-nav-bar fa fa-user" aria-hidden="true"></i>My Account</a></li>
+                    <li><a class='item-catalog-nav-link' href="javascript:void(0)" onclick='disconnect("{{current_provider()}}")'><i class="font-awesome-nav-bar fa fa-sign-out" aria-hidden="true"></i>Disconnect</a></li>
                     {% else %}
                     <li><a style="cursor:normal !important;" href="javascript:void(0)">Connect with:</a></li>
                     <li><a class='item-catalog-nav-link' href="javascript:void(0)" onclick='connect("facebook")'><i class="font-awesome-nav-bar fa fa-facebook-official" aria-hidden="true"></i>Facebook</a></li>
@@ -76,8 +78,7 @@
     </footer>
 
     {% if CSRFToken %}
-    <input id='CSRFToken' type="hidden" name="CSRFToken" value="{{CSRFToken}}">
-     {% endif %}
+    <input id='CSRFToken' type="hidden" name="CSRFToken" value="{{CSRFToken}}"> {% endif %}
 </body>
 <script>
     window.fbAsyncInit = function() {

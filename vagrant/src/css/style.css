@@ -7,24 +7,34 @@ colors
 #21295C
 */
 
-.navbar{
-  border-radius: 0 !important;
+.transition-filter {
+    opacity: 0.7;
+    background-color: #000;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
 }
 
-.navbar-inverse{
-  background-color: #21295C !important;
+.navbar {
+    border-radius: 0 !important;
 }
 
-
-.item-catalog-nav-link{
-  color:#CFDBD5 !important;
+.navbar-inverse {
+    background-color: #21295C !important;
 }
 
-.item-catalog-nav-link:hover{
-  color:#F6AE2D !important;
-  background-color: #1B4079 !important;
+.item-catalog-nav-link {
+    color: #CFDBD5 !important;
 }
 
-.font-awesome-nav-bar{
-  margin-right:10px;
+.item-catalog-nav-link:hover {
+    color: #F6AE2D !important;
+    background-color: #1B4079 !important;
+}
+
+.font-awesome-nav-bar {
+    margin-right: 10px;
 }

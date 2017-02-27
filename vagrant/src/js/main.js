@@ -71,8 +71,11 @@ function sendlogininfo(type, name, email, profile_pic) {
         },
         method: 'GET',
         success: function(response) {
-            if (response == 'OK'){
-              window.location.href = '/'
+            if (response == 'OK') {
+                $('.transition-filter').removeClass('hidden');
+                document.location.reload();
+            } else {
+                alert('Something went wrong!')
             }
         },
     });
@@ -90,15 +93,18 @@ function disconnect(type) {
         },
         method: 'GET',
         success: function(response) {
-            if (type == 'google') {
-                var auth2 = gapi.auth2.getAuthInstance();
-                auth2.signOut().then(function() {
-                    console.log('User signed out.');
-                });
-            } else if (type == 'facebook') {
-                FB.logout(function(response) {
-                    console.log(response);
-                });
+            if (response == 'OK') {
+                if (type == 'google') {
+                    var auth2 = gapi.auth2.getAuthInstance();
+                    auth2.signOut().then(function() {
+                        console.log('User signed out.');
+
+                    });
+                } else if (type == 'facebook') {
+
+                }
+                $('.transition-filter').removeClass('hidden');
+                document.location.reload();
             }
         },
     });

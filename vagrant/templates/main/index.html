@@ -27,24 +27,39 @@
         <hr> {% if user %}
         <div class="row">
             <div class="col-xs-12">
-
+                <p>To create new category please click <a href="{{url_for('category.category_edit')}}" class='btn btn-default btn-success'>HERE</a></p>
+                <p>To create new item please click <a href="{{url_for('item.item_edit')}}" class='btn btn-default btn-success'>HERE</a></p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>User Created Categories</h4> {% if user.categories|length > 0%}
+                <ul>
+                    {% for category in user.categories %}
+                    <li> <a href=""> category.name</a></li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>You have not created any category</p>
+                {% endif%}
             </div>
             <div class="col-sm-6">
-                <p>To create new categories please click <a href="{{url_for('category.category_edit')}}" class='btn btn-default btn-success'>HERE</a></p>
-                <h4>User Created Categories</h4>
-            </div>
-            <div class="col-sm-6">
-                <p>To create new categories please click <a href="{{url_for('category.category_edit')}}" class='btn btn-default btn-success'>HERE</a></p>
-                <h4>User Created Items</h4>
+                <h4>User Created Items</h4> {% if user.items|length > 0%}
+                <ul>
+                    {% for item in user.items %}
+                    <li> <a href=""> item.name</a></li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>You have not created any item</p>
+                {% endif%}
             </div>
         </div>
         {% endif %}
     </div>
 </div>
-{% endblock %}
-
-{% block scripts %}
+{% endblock %} {% block scripts %}
 <script type="text/javascript">
-
 </script>
 {% endblock %}

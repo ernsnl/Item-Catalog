@@ -11,6 +11,10 @@ Base = declarative_base()
 engine = create_engine(
     'mysql+pymysql://UdacityStaff:183461@188.121.44.181/ItemCatalog')
 
+def utility_function():
+    def current_provider():
+        return session['provider']
+    return dict(current_provider=current_provider)
 
 def initiate_session_token():
     if not 'CSRFToken' in session:
@@ -37,5 +41,6 @@ def create_app():
     Base.metadata.create_all(engine)
     # init CSRFToken
     app.before_request(initiate_session_token)
-
+    # context precessor
+    app.context_processor(utility_function)
     return app

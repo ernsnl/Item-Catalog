@@ -39,7 +39,6 @@ def connect():
             session['provider'] = provider
             session['email'] = email
             session['name'] = name
-            print 'asdasd'
             return 'OK'
         else:
             return 'Error'
@@ -51,4 +50,17 @@ def connect():
 
 @user_app.route('/disconnect')
 def disconnect():
+    try:
+        CSRFToken = request.args.get('CSRFToken')
+        if CSRFToken is not None and session['CSRFToken'] == CSRFToken:
+            session.pop('provider', None)
+            session.pop('email', None)
+            session.pop('name', None)
+            return 'OK'
+        else:
+            return 'Error'
+    except Exception as e:
+        raise
+    finally:
+        pass
     return 'User will disconnect'
