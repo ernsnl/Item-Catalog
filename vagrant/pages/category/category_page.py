@@ -8,7 +8,19 @@ category_app = Blueprint('category', __name__)
 
 @category_app.route('/category')
 def category_list():
-    return 'It will return category list'
+    try:
+        database_session = sessionmaker(bind=engine)
+        current_session = database_session()
+        current_user = None
+        if 'email' in session:
+            current_user = current_session.query(User).filter(
+                User.email == session['email']).first()
+        categories = current_session.query(Category).all()
+        return render_template('category/list.html', categories=categories, user = current_user)
+    except Exception as e:
+        print e
+    finally:
+        current_session.close()
 
 
 @category_app.route('/category/<int:category_id>')
@@ -77,7 +89,7 @@ def category_edit(category_id=None):
                             'DescriptiveText')
                         current_session.commit()
                         flash('Category updated successfully.', 'success')
-                        return redirect(url_for('main.index'))
+                        return redirect(url_for('category.category_individual', category_id=current_category.id))
                     else:
                         flash('Something went wrong!.', 'error')
                         return redirect(url_for('main.index'))
@@ -88,8 +100,9 @@ def category_edit(category_id=None):
                                                 user_id=current_user.id)
                     current_session.add(current_category)
                     current_session.commit()
+                    current_session.refresh(current_category)
                     flash('Updated successfully.', 'success')
-                    return redirect(url_for('user.user', user_id=current_user.id))
+                    return redirect(url_for('category.category_individual', category_id=current_category.id))
             else:
                 flash('You are not logged in.', 'error')
                 return redirect(url_for('main.index'))

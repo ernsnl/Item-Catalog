@@ -15,15 +15,6 @@
                 </ul>
             </div>
         </div>
-        <hr>
-        <div class="row">
-            <div class="col-sm-6">
-                <h4>All Categories</h4>
-            </div>
-            <div class="col-sm-6">
-                <h4>All Items</h4>
-            </div>
-        </div>
         <hr> {% if user %}
         <div class="row">
             <div class="col-xs-12">
@@ -48,7 +39,7 @@
                 <h4>User Created Items</h4> {% if user.items|length > 0%}
                 <ul>
                     {% for item in user.items %}
-                    <li> <a href=""> item.name</a></li>
+                    <li> <a href="{{url_for('item.item_individual', item_id = item.id)}}"> {{item.name}}</a></li>
                     {% endfor %}
                 </ul>
                 {% else %}

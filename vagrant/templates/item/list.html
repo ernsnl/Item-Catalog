@@ -1,0 +1,21 @@
+{% extends "layout.html" %} {% block content %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="row">
+            <h2>Items</h2>
+            {% if items|length > 0 %}
+            {% for item in items %}
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <a href="{{url_for('item.item_individual', item_id= item.id)}}">{{item.name}}</a>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>There is no item.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

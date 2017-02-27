@@ -1,0 +1,27 @@
+{% extends "layout.html" %} {% block content %}
+<div class="row">
+    <div class="col-xs-12">
+        <form action="{{url_for('item.item_edit', item_id = item.id if item else 0)}}" method="post" class="item-form">
+            <div class="form-group">
+                <label for="Name">Name</label>
+                <input type="text" class="form-control" id="Name" name='Name' placeholder="Name" value='{{item.name if item}}'>
+            </div>
+            <div class="form-group">
+                <label for="Category">Category</label>
+                <select class="form-control" name="Category" id='Category'>
+ {% for category in categories %}
+<option value="{{category.id}}" {% if item and category.id == item.category_id %} selected="selected" {% endif %}>{{category.name}}</option>
+{% endfor%}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="DescriptiveText">Descriptive Text</label>
+                <textarea class='form-control' id='DescriptiveText' name="DescriptiveText" maxlength="500" rows="8">{{ item.descriptive_text if item}}</textarea>
+            </div>
+
+            <input type="hidden" name="CSRFToken" value="{{CSRFToken()}}">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "layout.html" %} {% block content %}
+<div class="row">
+    <div class="col-xs-12">
+        <h3 class='view-title'>Item</h3>
+        <p class="about-user-info"><span class='about-title'>Name: </span>{{item.name}}</p>
+        <p class="about-user-info"><span class='about-title'>Descriptive Text: </span>{{item.descriptive_text}}</p>
+        <p class="about-user-info"><span class='about-title'>Category: </span>{{item.category.name}}</p>
+        {% if user and user.id == item.user_id %}
+        <a type="button" href="{{url_for('item.item_edit', item_id = item.id)}}" class="user-edit-button btn btn-primary">Edit</a> {% endif %}
+    </div>
+</div>
+{% endblock %}
