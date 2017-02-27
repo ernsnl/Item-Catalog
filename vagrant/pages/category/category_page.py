@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template
-from application import db
-from classes.category import Category
+from classes.orm import Category
 
 category_app = Blueprint('category', __name__)
 

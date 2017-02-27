@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template
-from application import db
-from classes.item import Item
+from classes.orm import Item
 
 item_app = Blueprint('item', __name__)
 

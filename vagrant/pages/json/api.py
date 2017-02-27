@@ -1,7 +1,5 @@
 from flask import Blueprint, render_template
-from application import db
-from classes.category import Category
-from classes.item import Item
+from classes.orm import Category, Item
 api = Blueprint('api', __name__)
 
 @api.route('/api/item')

@@ -71,7 +71,9 @@ function sendlogininfo(type, name, email, profile_pic) {
         },
         method: 'GET',
         success: function(response) {
-            console.log(response);
+            if (response == 'OK'){
+              window.location.href = '/'
+            }
         },
     });
 }

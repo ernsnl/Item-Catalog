@@ -1,10 +1,16 @@
 from flask import Flask, session
-from flask_sqlalchemy import SQLAlchemy
 from utility.string_func import generate_random_string
 
-db = SQLAlchemy()
+from sqlalchemy import create_engine, desc
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
 # application factory, see: http://flask.pocoo.org/docs/patterns/appfactories/
+
+Base = declarative_base()
+engine = create_engine(
+    'mysql+pymysql://UdacityStaff:183461@188.121.44.181/ItemCatalog')
+
 
 def initiate_session_token():
     if not 'CSRFToken' in session:
@@ -12,10 +18,6 @@ def initiate_session_token():
 
 def create_app():
     app = Flask(__name__, static_folder='build')
-    app.config[
-        'SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://UdacityStaff:183461@188.121.44.181/ItemCatalog"
-
-    db.init_app(app)
     # import blueprints
     from pages.index.index_page import main_app
     from pages.category.category_page import category_app
@@ -30,10 +32,10 @@ def create_app():
     app.register_blueprint(user_app)
     # secret key
     app.secret_key = 'Iy9nqBE25fJ8XkQHFz1Z'
+    # SQLAlchemy
+    Base.metadata.bind = engine
+    Base.metadata.create_all(engine)
     # init CSRFToken
     app.before_request(initiate_session_token)
-
-    with app.app_context():
-        db.create_all()
 
     return app

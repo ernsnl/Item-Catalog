@@ -50,7 +50,7 @@
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     {% if user %}
-                    <li><a class='item-catalog-nav-link' href="{{url_for('user.user', user_id == user.id)}}"><i class="fa fa-user" aria-hidden="true"></i>My Account</a></li>
+                    <li><a class='item-catalog-nav-link' href="{{url_for('user.user', user_id = user.id)}}"><i class="fa fa-user" aria-hidden="true"></i>My Account</a></li>
                     <li><a class='item-catalog-nav-link' href="javascript:void(0)" onclick='disconnect()'><i class="fa fa-sign-out" aria-hidden="true"></i>Disconnect</a></li>
                     {% else %}
                     <li><a style="cursor:normal !important;" href="javascript:void(0)">Connect with:</a></li>
