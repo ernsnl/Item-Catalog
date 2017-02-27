@@ -90,6 +90,11 @@ def item_edit(item_id=None):
                     current_item = current_session.query(
                         Item).filter(Item.id == item_id).first()
                     if current_item is not None and current_item.user_id == current_user.id:
+                        if len(request.form.getlist('check')) > 0:
+                            current_session.delete(current_item)
+                            current_session.commit()
+                            flash('Item is deleted successfully.', 'success')
+                            return redirect(url_for('main.index'))
                         current_item.name = request.form.get(
                             'Name')
                         current_item.descriptive_text = request.form.get(

@@ -19,6 +19,14 @@
                 <textarea class='form-control' id='DescriptiveText' name="DescriptiveText" maxlength="500" rows="8">{{ item.descriptive_text if item}}</textarea>
             </div>
 
+            {% if item %}
+            <div class="form-group">
+            <label class="checkbox-inline">
+              <input type="checkbox" id="Delete" value="Delete" name="check"> By Checking this box you will be deleting this item. Be Careful
+            </label>
+            </div>
+            {% endif %}
+
             <input type="hidden" name="CSRFToken" value="{{CSRFToken()}}">
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
