@@ -25,6 +25,15 @@ function handleFacebook() {
                 scope: 'public_profile,email'
             });
         }
+        if (response.status === 'connected') {
+            FB.api('/' + response.authResponse.userID + '?fields=id,name,email,picture.width(200).height(200)',
+                function(infoResponse) {
+                    console.log(infoResponse);
+                    if (infoResponse && !infoResponse.error) {
+                        sendlogininfo('facebook', infoResponse.name, infoResponse.email, infoResponse.picture.data.url)
+                    }
+                });
+        }
     });
 }
 
